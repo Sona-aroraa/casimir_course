@@ -13,8 +13,8 @@ print(h ," and ",s, " are awesome!")
 #print("circumference: ", circum)
 
 
-bff =  test.new_function(100, 100)
+bff =  test.new_function(h, 1000)
 
-print("bff = " + str(bff))
+print("bff = " + bff)
 
 
