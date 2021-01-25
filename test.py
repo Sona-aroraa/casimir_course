@@ -10,7 +10,7 @@ def circumference(radius):
 def surface(radius):
 	'''This fucntion calculates the surface of the circle
     
-    : param float radius : radius of the circle
+    : param float radius : radius of the given circle
 	
     '''
 	return np.pi*radius**2
