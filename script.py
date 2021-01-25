@@ -1,4 +1,4 @@
 import test
 
-circum = test.circumference(4)
+circum = test.circumference(radius)
 print("circumference: ", circum)
