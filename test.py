@@ -17,3 +17,6 @@ def surface(radius):
 	return np.pi*radius**2
 
 
+def new_function(hanifa, sona):
+	return hanifa * sona 
+
