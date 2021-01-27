@@ -1,47 +1,36 @@
 import urllib.request
-
-import time
 import feedparser
+import numpy as np
 
-# Base api query url
-base_url = 'http://export.arxiv.org/api/query?';
+base_url = 'http://export.arxiv.org/api/query?'
+search_query = urllib.parse.quote("ti:novel")
+i=0
 
-# Search parameters
-search_query = urllib.parse.quote("all:novel")
-i = 0
-results_per_iteration = 1000
-wait_time = 3
-papers = []
-year = ""
-print('Searching arXiv for %s'%search_query)
+papers = np.zeros((10))
+# papers['2021'], papers['2020'], papers['2019'] = 
+year = "2021" 
+ 
+# def findPapers()
+# while "published" == "2021":
+for i in range(0, 1000):
+    query = 'search_query=%s&start=%i&max_results=%i&sortBy=submittedDate&sortOrder=descending' % (search_query,
+                                                             i,
+                                                             i+1)
 
-# while (year != "2018"): #stop requesting when papers date reach 2018
-#     print("Results %i - %i" % (i,i+results_per_iteration))
-    
-#     query = 'search_query=%s&start=%i&max_results=%i&sortBy=submittedDate&sortOrder=descending' % (search_query,
-#                                                          i,
-#                                                          results_per_iteration)
+    response = urllib.request.urlopen(base_url+query).read()
+    # parse the response using feedparser
+    feed = feedparser.parse(response)
 
-#     # perform a GET request using the base_url and query
-#     response = urllib.request.urlopen(base_url+query).read()
-
-#     # parse the response using feedparser
-#     feed = feedparser.parse(response)
-#     # Run through each entry, and print out information
-#     for entry in feed.entries:
-#         #print('arxiv-id: %s' % entry.id.split('/abs/')[-1])
-#         #print('Title:  %s' % entry.title)
-#         #feedparser v4.1 only grabs the first author
-#         #print('First Author:  %s' % entry.author)
-#         paper = {}
-#         paper["date"] = entry.published
-#         year = paper["date"][0:4]
-#         paper["title"] = entry.title
-#         paper["first_author"] = entry.author
-#         paper["summary"] = entry.summary
-#         papers.append(paper)
-#     # Sleep a bit before calling the API again
-#     print('Bulk: %i' % 1)
-#     i += results_per_iteration
-#     time.sleep(wait_time)
-print(search_query)
+    if feed.entries[i]['published'][:4]=="2021":
+#         print(feed.entries[i]['published'])
+#         print(feed.entries[i]['title'])
+        papers[0] = papers[0] + 1
+        
+    elif feed.entries[i]['published'][:4]=="2020":
+        papers[1] = papers[1] + 1
+        print(feed.entries[i]['published'])
+#         print(feed.entries[i]['title'])
+    elif feed.entries[i]['published'][:4]=="2019":
+        papers[2] = papers[2] + 1
+#         print(feed.entries[i]['published'])
+#         print(feed.entries[i]['title'])
